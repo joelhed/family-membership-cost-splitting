@@ -4,26 +4,12 @@ from typing import Tuple, List, Dict, NamedTuple
 import datetime as dt
 
 
-
-
-# One person, the Payer, pays for one year of family membership.
-
-# The cost for every day of membership is shared equally across all family members at that date.
-# When a new family member joins, they pay for their part of the rest of the year to the Payer. 
-# At the end of the year, the Payer will have some surplus money,
-# given that new family members joined within the year.
-# You cannot stop being a member until the end of the family membership.
-
-# The model of this program includes every family member and the date they joined, and
-# calculates what payments every person should have made and received for the entire year,
-# and in the end, what they owe and are owed.
-
 CURRENCY = "kr"
 FAMILY_MEMBERSHIP_PRICE = 350
 FAMILY_MEMBERSHIP_DURATION = dt.timedelta(days=365)
 
 
-FamilyMember = Tuple[str, dt.date]
+FamilyMember = Tuple[str, dt.date]  # name, date where membership started
 
 
 class Period(NamedTuple):
