@@ -135,11 +135,19 @@ def print_events(events):
 
 
 def print_costs(periods):
-    cost_per_person = defaultdict(int)
+    sum_ = 0.0
+    print(f"{'Period':23}  Days  Members  Cost/member  Cost/period  {'Sum':>7}")
     for period in periods:
-        print(f"{period.start.isoformat()} - {period.last.isoformat()}: {period.days:3} days, {period.num_members} members, {period.cost_per_member:.2f} {CURRENCY} per member")
-        print("Members: ", ", ".join(period.members))
-        print()
+        cost_per_period = period.cost_per_member * period.num_members
+        sum_ += cost_per_period
+        print(f"{period.start.isoformat()} - {period.last.isoformat()}  "
+                f"{period.days:4}  "
+                f"{period.num_members:7}  "
+                f"{period.cost_per_member:11.2f}  "
+                f"{cost_per_period:11.2f}  "
+                f"{sum_:7.2f}")
+
+    print()
 
 
 def print_individual_reports(family):
@@ -198,8 +206,8 @@ if __name__ == "__main__":
         ("Sophie", "2023-02-15"),
         ("Olle", "2023-04-23"),
     ]))
-    print(family.members)
-    #print_events(family.calculate_events())
+    print("Costs for the membership:")
     print_costs(family.calculate_costs())
 
+    print()
     print_individual_reports(family)
